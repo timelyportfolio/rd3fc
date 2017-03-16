@@ -39,8 +39,14 @@ var xExtent = fc.extentDate()
 var gridlines = fc.annotationSvgGridline();
 var candlestick = fc.seriesSvgCandlestick()
   .crossValue(function(d) {return new Date(d.date)});
+var bollinger = fc.seriesSvgArea()
+  .crossValue(function(d) { return new Date(d.date); })
+  .mainValue(function(d) { return d.upper; })
+  .baseValue(function(d) { return d.lower; });
+
+
 var multi = fc.seriesSvgMulti()
-  .series([gridlines, candlestick]);
+  .series([gridlines, bollinger, candlestick]);
 
 var chart = fc.chartSvgCartesian(
   fc.scaleDiscontinuous(d3.scaleTime()),
@@ -62,7 +68,12 @@ app <- tagList(
     HTML(
       sprintf(
 "
-var data = %s
+var data = %s;
+// add bollinger bands
+fc.indicatorBollingerBands().value(d=>d.close)(data).map(function(d,i) {
+  data[i] = Object.assign(d, data[i])
+});
+
 %s
 ",
         jsonlite::toJSON(
