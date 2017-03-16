@@ -1,0 +1,33 @@
+Package: rd3fc
+Title: 'd3fc' Financial Chart Components in R
+Version: 0.0.0.9000
+Authors@R: c(
+      person(
+        "Scott Logic", "Inc"
+        , role = c("aut", "cph")
+        , comment = "d3fc library in lib, https://d3fc.io; see https://github.com/d3fc/d3fc/graphs/contributors for full list of contributors"
+      ),
+      person(
+        "Kent", "Russell"
+        , role = c("aut", "cre")
+        , comment = "R interface"
+        , email = "kent.russell@timelyportfolio.com"
+      )
+    )
+Maintainer: Kent Russell <kent.russell@timelyportfolio.com>
+Description:
+    Easily incorporate interactive 'd3.js' financial components for
+    time series and general charting.
+Depends:
+    R (>= 3.2.0)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1
+Suggests:
+    d3r,
+    htmltools
+Enhances:
+    PerformanceAnalytics,
+    quantmod,
+    xts
