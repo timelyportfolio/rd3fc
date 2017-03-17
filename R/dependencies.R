@@ -11,7 +11,7 @@ html_dependency_d3fc <- function(offline=TRUE){
     name = "d3fc",
     version = d3fc_version(),
     src = system.file("htmlwidgets/d3fc/build",package="rd3fc"),
-    script = c("d3fc.js")
+    script = c("d3fc.min.js")
   )
 
   if(!offline) {
