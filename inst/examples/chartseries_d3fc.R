@@ -1,5 +1,5 @@
+\dontrun{
 # translate quantmod::chart_Series to d3fc
-
 library(quantmod)
 library(d3r)
 library(rd3fc)
@@ -9,11 +9,15 @@ sp500w <- to.weekly(sp500)
 
 cs <- chart_Series(sp500w)
 
+# live interactive version
+#  might not show up in RStudio
+chartseries(cs)
+
 # examine the chart_Series environment to replicate each
 #  of the pieces
-listviewer::jsonedit(
-  jsonlite::toJSON(as.list(cs$Env), force=TRUE, auto_unbox=TRUE)
-)
+#listviewer::jsonedit(
+#  jsonlite::toJSON(as.list(cs$Env), force=TRUE, auto_unbox=TRUE)
+#)
 
 # data
 cs$Env$xdata
@@ -33,4 +37,4 @@ index(cs$Env$xdata[cs$Env$xlim,])
 cs$Env$alabels
 # limits
 cs$Env$ylim[[2]]
-
+}

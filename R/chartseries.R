@@ -2,6 +2,7 @@
 #'
 #' Convert \code{quantmod::chart_Series} to interactive d3fc htmlwidget chart.
 #'
+#' @example inst/examples/chartseries_d3fc.R
 #' @import htmlwidgets
 #'
 #' @export
