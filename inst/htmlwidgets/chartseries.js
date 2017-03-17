@@ -44,7 +44,17 @@ HTMLWidgets.widget({
             return d.date;
           }]);
 
-        var gridlines = fc.annotationSvgGridline();
+        var gridlines = fc.annotationSvgGridline()
+          .xDecorate(function(lines) {
+            lines
+              .style('stroke-width', '0.25px')
+              .style('stroke-dasharray', 2);
+          })
+          .yDecorate(function(lines) {
+            lines
+              .style('stroke-width', '0.25px')
+              .style('stroke-dasharray', 2);
+          });
         var candlestick = fc.seriesSvgCandlestick()
           .crossValue(function(d) {return new Date(d.date)});
         var multi = fc.seriesSvgMulti()
