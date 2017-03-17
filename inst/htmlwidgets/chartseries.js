@@ -55,10 +55,12 @@ HTMLWidgets.widget({
         var yScale = d3.scaleLinear();
 
         var find_point = function(pt) {
-          var data_price = data[d3.bisectLeft(
+          var row = d3.bisectLeft(
             data.map(function(row){return row.date;}),
             xScale.invert(pt.x)
-          )];
+          );
+          if(row === data.length) row = row - 1;
+          var data_price = data[row];
           return data_price;
         }
 
