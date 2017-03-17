@@ -55,7 +55,7 @@ HTMLWidgets.widget({
         var yScale = d3.scaleLinear();
 
         var find_point = function(pt) {
-          var row = d3.bisectLeft(
+          var row = d3.bisectRight(
             data.map(function(row){return row.date;}),
             xScale.invert(pt.x)
           );
