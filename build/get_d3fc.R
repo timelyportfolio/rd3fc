@@ -9,6 +9,7 @@ get_d3fc_latest <- function(){
 
 # get newest d3fc
 download.file("https://unpkg.com/d3fc/build/d3fc.min.js", "./inst/htmlwidgets/d3fc/build/d3fc.min.js")
+download.file("https://unpkg.com/d3fc/build/d3fc.js", "./inst/htmlwidgets/d3fc/build/d3fc.js")
 
 # write function with newest version
 #  for use when creating dependencies
