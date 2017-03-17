@@ -2,7 +2,7 @@
 
 library(quantmod)
 library(d3r)
-library(d3fc)
+library(rd3fc)
 
 sp500 <- getSymbols("^GSPC", auto.assign=FALSE)
 sp500w <- to.weekly(sp500)
