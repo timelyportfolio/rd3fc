@@ -67,11 +67,15 @@ HTMLWidgets.widget({
         var crosshair = fc.annotationSvgCrosshair()
           .xScale(xScale)
           .yScale(yScale)
-          .y(function(d){
+          .x(function(d) {
+            // don't go into left axis
+            return Math.min(d.x, xScale(data[data.length - 1].date));
+          })
+          .y(function(d) {
             return yScale(find_point(d).close);
           })
           .xLabel(function(d) {
-            return d3.timeFormat('%b %d, %Y')(xScale.invert(d.x));
+            return d3.timeFormat('%b %d, %Y')(find_point(d).date);
           })
           .yLabel(function(d) {
             return find_point(d).close;
