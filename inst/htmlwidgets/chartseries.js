@@ -94,8 +94,13 @@ HTMLWidgets.widget({
         )
           .yDomain(yExtent(data))
           .xDomain(xExtent(data))
+          .chartLabel(x.name)
           .plotArea(multi)
           .decorate(function(el, data){
+            // left align chart title
+            el.select('.chart-label')
+              .style('text-align', 'left');
+
             var crosshair_el = el.select(".plot-area svg")
               .append("g")
               .classed("d3fc-crosshair-container", true);
