@@ -50,7 +50,8 @@ HTMLWidgets.widget({
         var multi = fc.seriesSvgMulti()
           .series([gridlines, candlestick]);
 
-        var xScale = fc.scaleDiscontinuous(d3.scaleTime());
+        var xScale = fc.scaleDiscontinuous(d3.scaleTime())
+          .discontinuityProvider(fc.discontinuitySkipWeekends());
         var yScale = d3.scaleLinear();
 
         var find_point = function(pt) {
