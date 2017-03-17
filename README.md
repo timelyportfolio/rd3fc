@@ -26,6 +26,12 @@ I view this as simply amazing, but the only thing missing is some interactivity.
     # will use the current.chob() if no arguments
     chartseries()
 
+[live example](https://bl.ocks.org/timelyportfolio/5ab93494dedad6e5a79a07bbb3a78ecd)
+
 ### Code of Conduct
 
 I would love help ad ideas, but please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+### Attribution and Thanks
+
+Thanks to Mike Bostock for [`d3.js`](https://d3js.org) and the team at [Scott Logic](http://www.scottlogic.com/) for [`d3fc`](https://d3fc.io).
