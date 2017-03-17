@@ -84,6 +84,7 @@ chartseries_html <- function(id, style, class, ...){
     tags$div(
       id = id, class = class, style = style
     ),
+    html_dependency_polyfill(),
     d3r::d3_dep_v4(),
     html_dependency_d3fc()
   )

@@ -20,3 +20,26 @@ html_dependency_d3fc <- function(offline=TRUE){
 
   hd
 }
+
+#' Dependencies for polyfill
+#'
+#' @param offline \code{logical} to use local file dependencies.  If \code{FALSE},
+#'          then the dependencies use the unpkg.com cdn as its \code{src}.
+#'
+#' @return \code{\link[htmltools]{htmlDependency}}
+#' @importFrom htmltools htmlDependency
+#' @export
+html_dependency_polyfill <- function(offline=TRUE){
+  hd <- htmltools::htmlDependency(
+    name = "babel-polyfill",
+    version = "6.23.0",
+    src = system.file("htmlwidgets/babel-polyfill",package="rd3fc"),
+    script = c("polyfill.min.js")
+  )
+
+  if(!offline) {
+    hd$src <- list(href="//unpkg.com/babel-polyfill/polyfill.min.js")
+  }
+
+  hd
+}

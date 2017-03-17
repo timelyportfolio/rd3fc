@@ -3,6 +3,7 @@
 export(chartseries)
 export(chartseriesOutput)
 export(html_dependency_d3fc)
+export(html_dependency_polyfill)
 export(renderChartseries)
 import(htmltools)
 import(htmlwidgets)
