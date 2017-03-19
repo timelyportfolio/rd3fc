@@ -98,6 +98,17 @@ HTMLWidgets.widget({
               .attr('dx', '-0.32em');
           });
 
+        var draw_crosshair = function() {
+          d3.event.preventDefault();
+          d3.event.stopPropagation();
+
+          var crosshair_el = d3.select(this).select(".d3fc-crosshair-container");
+          var pt = d3.mouse(this) || d3.touch(this);
+          var data = [find_point({ x: pt[0], y: pt[1] })];
+          crosshair_el.datum(data);
+          crosshair_el.call(crosshair);
+        };
+
         var chart = fc.chartSvgCartesian(
           xScale,
           yScale
@@ -114,18 +125,10 @@ HTMLWidgets.widget({
             var crosshair_el = el.select(".plot-area svg")
               .append("g")
               .classed("d3fc-crosshair-container", true);
-            el.on("mouseover", function(){
-              var point = d3.mouse(this);
-              data = [find_point({ x: point[0], y: point[1] })];
-              crosshair_el.datum(data);
-              crosshair_el.call(crosshair);
-            });
-            el.on("mousemove", function(){
-              var point = d3.mouse(this);
-              data = [find_point({ x: point[0], y: point[1] })];
-              crosshair_el.datum(data);
-              crosshair_el.call(crosshair);
-            });
+            el.on("mouseover", draw_crosshair);
+            el.on("mousemove", draw_crosshair);
+            el.on("touchstart", draw_crosshair);
+            el.on("touchmove", draw_crosshair);
           });
 
         d3.select(el)
