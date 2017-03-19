@@ -79,16 +79,16 @@ HTMLWidgets.widget({
           .yScale(yScale)
           .x(function(d) {
             // don't go into left axis
-            return Math.min(d.x, xScale(data[data.length - 1].date));
+            return xScale(d.date);
           })
           .y(function(d) {
-            return yScale(find_point(d).close);
+            return yScale(d.close);
           })
           .xLabel(function(d) {
-            return d3.timeFormat('%b %d, %Y')(find_point(d).date);
+            return d3.timeFormat('%b %d, %Y')(d.date);
           })
           .yLabel(function(d) {
-            return find_point(d).close;
+            return d.close;
           })
           .decorate(function(el, data) {
             el.select('.right-handle text')
@@ -116,13 +116,13 @@ HTMLWidgets.widget({
               .classed("d3fc-crosshair-container", true);
             el.on("mouseover", function(){
               var point = d3.mouse(this);
-              data = [{ x: point[0], y: point[1] }];
+              data = [find_point({ x: point[0], y: point[1] })];
               crosshair_el.datum(data);
               crosshair_el.call(crosshair);
             });
             el.on("mousemove", function(){
               var point = d3.mouse(this);
-              data = [{ x: point[0], y: point[1] }];
+              data = [find_point({ x: point[0], y: point[1] })];
               crosshair_el.datum(data);
               crosshair_el.call(crosshair);
             });
