@@ -99,7 +99,7 @@ HTMLWidgets.widget({
           });
 
         var draw_crosshair = function() {
-          //d3.event.preventDefault();
+          d3.event.preventDefault();
           d3.event.stopPropagation();
 
           var crosshair_el = d3.select(this).select(".d3fc-crosshair-container");
