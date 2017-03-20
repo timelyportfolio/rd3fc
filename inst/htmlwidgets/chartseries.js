@@ -100,12 +100,10 @@ HTMLWidgets.widget({
 
         var draw_crosshair = function() {
           //d3.event.preventDefault();
-          //d3.event.stopPropagation();
+          d3.event.stopPropagation();
 
           var crosshair_el = d3.select(this).select(".d3fc-crosshair-container");
           var pt = d3.mouse(this) || d3.touch(this);
-          d3.select("body").append('p')
-            .text(crosshair_el.node().innerHTML);
           var data = [find_point({ x: pt[0], y: pt[1] })];
           crosshair_el.datum(data);
           crosshair_el.call(crosshair);
@@ -130,10 +128,9 @@ HTMLWidgets.widget({
             // none of this touch seems to work
             //  while the mouse at least works on windows
             //  will need to work more on this
-            /*
+
             el.on("touchstart", draw_crosshair);
             el.on("touchmove", draw_crosshair);
-            */
             el.on("mouseover", draw_crosshair);
             el.on("mousemove", draw_crosshair);
           });
