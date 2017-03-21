@@ -131,13 +131,15 @@ HTMLWidgets.widget({
             el.select('.chart-label')
               .style('text-align', 'left');
 
-            var crosshair_el = el.select(".plot-area svg")
-              .append("g")
-              .classed("d3fc-crosshair-container", true);
-
+            // insert area container first
+            //   so it does not restrict viewing of crosshair
             el.select(".plot-area svg").append('g')
               .classed('crosshair-area',true)
               .datum(data);
+
+            var crosshair_el = el.select(".plot-area svg")
+              .append("g")
+              .classed("d3fc-crosshair-container", true);
 
             //el.on("touchstart", draw_crosshair);
             //el.on("touchmove", draw_crosshair);
