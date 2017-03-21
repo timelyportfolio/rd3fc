@@ -74,6 +74,12 @@ HTMLWidgets.widget({
           return data_price;
         };
 
+        var area = fc.seriesSvgArea()
+          .crossValue(function(d){ return d.date; })
+          .baseValue(function(d){ return d.close; })
+          .xScale(xScale)
+          .yScale(yScale);
+
         var crosshair = fc.annotationSvgCrosshair()
           .xScale(xScale)
           .yScale(yScale)
@@ -99,14 +105,17 @@ HTMLWidgets.widget({
           });
 
         var draw_crosshair = function() {
-          d3.event.preventDefault();
-          d3.event.stopPropagation();
-
+          //d3.event.preventDefault();
+          //d3.event.stopPropagation();
           var crosshair_el = d3.select(this).select(".d3fc-crosshair-container");
           var pt = d3.mouse(this) || d3.touch(this);
           var data = [find_point({ x: pt[0], y: pt[1] })];
           crosshair_el.datum(data);
           crosshair_el.call(crosshair);
+
+          area.mainValue(function(){ return data[0].close });
+          d3.select(this).select('.crosshair-area')
+            .call(area);
         };
 
         var chart = fc.chartSvgCartesian(
@@ -117,7 +126,7 @@ HTMLWidgets.widget({
           .xDomain(xExtent(data))
           .chartLabel(x.name)
           .plotArea(multi)
-          .decorate(function(el, data){
+          .decorate(function(el){
             // left align chart title
             el.select('.chart-label')
               .style('text-align', 'left');
@@ -125,14 +134,21 @@ HTMLWidgets.widget({
             var crosshair_el = el.select(".plot-area svg")
               .append("g")
               .classed("d3fc-crosshair-container", true);
-            // none of this touch seems to work
-            //  while the mouse at least works on windows
-            //  will need to work more on this
 
-            el.on("touchstart", draw_crosshair);
-            el.on("touchmove", draw_crosshair);
+            el.select(".plot-area svg").append('g')
+              .classed('crosshair-area',true)
+              .datum(data);
+
+            //el.on("touchstart", draw_crosshair);
+            //el.on("touchmove", draw_crosshair);
             el.on("mouseover", draw_crosshair);
             el.on("mousemove", draw_crosshair);
+
+            var drag = d3.drag()
+              .on("start", draw_crosshair)
+              .on("drag", draw_crosshair);
+
+            el.call(drag);
           });
 
         d3.select(el)
